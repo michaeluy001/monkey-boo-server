@@ -17,6 +17,9 @@ const allowedOrigins = [
   "https://michaeluy001.github.io"  // <-- your deployed frontend URL here
 ];
 
+app.options("/", cors());
+app.options("/submit", cors());
+
 app.use(
   cors({
     origin: function(origin, callback) {
@@ -51,10 +54,10 @@ app.get("/", async (req, res) => {
       "SELECT * FROM player ORDER BY playerscore DESC"
     );
     const result = query.rows;
-
     res.json(result);
   } catch (err) {
-    res.status(404).json("Error.", err);
+    console.log('Error on GET', err.message);
+    res.status(500).json({ error: err.message });
   }
 });
 
