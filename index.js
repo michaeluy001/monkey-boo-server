@@ -72,7 +72,7 @@ app.post("/submit", async (req, res) => {
     );
     res.status(200).json({ message: "Success" });
   } catch (err) {
-   res.status(400).json({ message: "Error" });
+   res.status(400).json({ message: "Error on post" });
   }
 });
 
