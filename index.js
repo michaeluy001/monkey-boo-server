@@ -54,7 +54,7 @@ app.get("/", async (req, res) => {
 
     res.json(result);
   } catch (err) {
-    res.send(404).json("Error.", err);
+    res.status(404).json("Error.", err);
   }
 });
 
