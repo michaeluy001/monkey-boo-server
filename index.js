@@ -7,13 +7,26 @@ import cors from "cors";
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:5173",
+  "https://michaeluy001.github.io/Monkey-Boo/"  // <-- your deployed frontend URL here
+];
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: function(origin, callback) {
+      if (!origin) return callback(null, true); // allow requests without an origin (like from Postman)
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true); // if the origin is in the allowed list, allow it
+      } else {
+        callback(new Error("Not allowed by CORS")); // otherwise, block it
+      }
+    },
     methods: ["POST", "GET"],
   })
 );
