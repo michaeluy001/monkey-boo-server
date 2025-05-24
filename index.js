@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
-  "https://michaeluy001.github.io/"  // <-- your deployed frontend URL here
+  "https://michaeluy001.github.io"  // <-- your deployed frontend URL here
 ];
 
 app.use(
